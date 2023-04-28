@@ -19,14 +19,12 @@ nunjucks.configure('src/views', {
   noCache: true,
 });
 
-{
-  async () => {
-    if (!fs.existsSync(dbFile)) {
-      await Migration.up();
-      await Seed.up();
-    }
-  };
-}
+(async () => {
+  if (!fs.existsSync(dbFile)) {
+    await Migration.up();
+    await Seed.up();
+  }
+})();
 
 app.listen(3000, () => {
   console.log('Food App is running!');
