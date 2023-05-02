@@ -1,22 +1,22 @@
-const Food = require("../models/Food");
+const Food = require('../models/Food');
 
 function up() {
   Food.create({
-    name: "Salada",
-    image: "/imgs/salada.jpg",
-    price: 15.5
+    name: 'Salada',
+    image: '/imgs/salada.jpg',
+    price: 15.5,
   });
 
   Food.create({
-    name: "Hambúrguer",
-    image: "/imgs/hamburguer.jpg",
-    price: 10
+    name: 'Hambúrguer',
+    image: '/imgs/hamburguer.jpg',
+    price: 10,
   });
 
   Food.create({
-    name: "Sanduí­che",
-    image: "/imgs/sanduiche.jpg",
-    price: 9
+    name: 'Sanduíche',
+    image: '/imgs/sanduiche.jpg',
+    price: 9,
   });
 }
 

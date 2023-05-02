@@ -6,4 +6,4 @@ const index = async (req, res) => {
   res.render('foods/index.njk', { foods });
 };
 
-module.exports = { index, readAll };
+module.exports = { index };
