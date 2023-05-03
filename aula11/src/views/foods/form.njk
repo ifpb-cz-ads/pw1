@@ -8,7 +8,7 @@
 </h1>
 
 <div class="col-md-6 mx-auto mb-5">
-  <form id="formFood" action="{{ '/foods/' + mode }}" method="post" enctype="multipart/form-data">
+  <form id="formFood" action="{{ '/foods/' + mode }}" method="post">
     <input type="hidden" value="{{ food.id }}" name="id">
     <div class="mb-3">
       <label for="food-name">Nome</label>

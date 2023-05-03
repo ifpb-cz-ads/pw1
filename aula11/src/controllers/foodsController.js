@@ -12,12 +12,6 @@ const index = async (req, res) => {
   res.render('foods/index.njk', { foods, categories });
 };
 
-const readAll = async (req, res) => {
-  const foods = await Food.readAll();
-
-  res.json(foods);
-};
-
 const getCreateForm = async (req, res) => {
   const categories = await Category.readAll();
 
@@ -26,8 +20,7 @@ const getCreateForm = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  const { name, price, category_id } = req.body;
-  const image = `/imgs/${req.file.filename}`;
+  const { name, image, price, category_id } = req.body;
 
   const newFood = { name, image, price, category_id };
 
@@ -47,8 +40,8 @@ const getUpdateForm = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  const { id, name, price, category_id } = req.body;
-  const image = req.file ? `/imgs/${imageFile.filename}` : req.body.originalImage;
+  const { id, name, originalImage, price, category_id } = req.body;
+  const image = req.body.image || originalImage;
 
   const updateFood = { name, image, price, category_id };
 
@@ -71,22 +64,11 @@ const destroy = async (req, res) => {
 
   const deleteId = await Food.destroy(id);
 
-  if (image) {
-    const imagePath = path.join('public', image);
-
-    fs.rm(imagePath, (err) => {
-      if (err) {
-        console.log(err);
-      }
-    });
-  }
-
   res.redirect('/');
 };
 
 module.exports = {
   index,
-  readAll,
   create,
   update,
   destroy,
