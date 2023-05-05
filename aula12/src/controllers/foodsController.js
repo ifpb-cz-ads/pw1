@@ -61,8 +61,19 @@ const getDeleteForm = async (req, res) => {
 
 const destroy = async (req, res) => {
   const { id } = req.body;
+  const { image } = await Food.readById(id);
 
   const deleteId = await Food.destroy(id);
+
+  if (image) {
+    const imagePath = path.join('public', image);
+
+    fs.rm(imagePath, (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+  }
 
   res.redirect('/');
 };
