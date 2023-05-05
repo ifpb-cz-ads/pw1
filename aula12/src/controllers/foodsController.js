@@ -20,7 +20,8 @@ const getCreateForm = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  const { name, image, price, category_id } = req.body;
+  const { name, price, category_id } = req.body;
+  const image = `/imgs/${req.file.filename}`;
 
   const newFood = { name, image, price, category_id };
 
@@ -41,7 +42,7 @@ const getUpdateForm = async (req, res) => {
 
 const update = async (req, res) => {
   const { id, name, originalImage, price, category_id } = req.body;
-  const image = req.body.image || originalImage;
+  const image = req.file ? `/imgs/${req.file.filename}` : originalImage;
 
   const updateFood = { name, image, price, category_id };
 
