@@ -1,0 +1,47 @@
+{% extends "layout.njk" %}
+
+{% set title = ("Cadastrar" if mode === 'create' else "Editar") %}
+
+{% block content %}
+<h1 class="mt-5 text-center">
+  {{ title }}
+</h1>
+
+<div class="col-md-6 mx-auto mb-5">
+  <form id="formFood" action="{{ '/foods/' + mode }}" method="post" enctype="multipart/form-data">
+    <input type="hidden" value="{{ food.id }}" name="id">
+    <div class="mb-3">
+      <label for="food-name">Nome</label>
+      <input type="text" class="form-control" id="food-name" name="name"
+             value="{{ food.name if food else '' }}">
+    </div>
+    <div class="mb-3">
+      <input type="hidden" name="originalImage" value="{{ food.image if food }}">
+      <label for="food-image">Imagem</label>
+      <input type="file" class="form-control" id="food-image" name="image" accept="image/*">
+      {% if food %}
+        <span>Atual: <a href="{{ food.image }}">{{ food.image }}</a></span>
+      {% endif %}
+    </div>
+    <div class="mb-3">
+      <label for="food-price">Preço</label>
+      <input type="text" class="form-control" id="food-price" name="price"
+             value="{{ food.price if food else ''}}">
+    </div>
+    <div class="mb-3">
+      <label for="food-category">Categoria</label>
+      <select class="form-control" id="food-category" name="category_id">
+        {% for category in categories %}
+          <option value="{{ category.id }}" {{ 'selected' if category.name === food.category }}>
+            {{ category.name }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">
+      {{ title }}
+    </button>
+    <a href="/" class="btn btn-danger">Cancelar</a>
+  </form>
+</div>
+{% endblock %}
