@@ -10,8 +10,6 @@ const middleware = require('../middleware');
 router.use(middleware.initLocals);
 
 router.get('/', (req, res) => res.redirect('/foods/index'));
-
-router.get('/', (req, res) => res.redirect('/foods/index'));
 router.get('/foods', foodsController.readAll);
 router.get('/foods/index', foodsController.index);
 router.get('/foods/create', middleware.isAuthenticated, foodsController.getCreateForm);
