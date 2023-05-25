@@ -12,6 +12,12 @@ const index = async (req, res) => {
   res.render('foods/index.njk', { foods, categories });
 };
 
+const readAll = async (req, res) => {
+  const foods = await Food.readAll();
+
+  res.json(foods);
+};
+
 const getCreateForm = async (req, res) => {
   const categories = await Category.readAll();
 
@@ -80,6 +86,7 @@ const destroy = async (req, res) => {
 
 module.exports = {
   index,
+  readAll,
   create,
   update,
   destroy,
