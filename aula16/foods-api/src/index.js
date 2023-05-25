@@ -54,7 +54,7 @@ app.patch('/foods/:id', (req, res) => {
 
     foods[index] = food;
 
-    res.json(food);
+    return res.json(food);
   } else {
     return res.status(400).json({ error: 'Food not found.' });
   }
@@ -68,7 +68,7 @@ app.delete('/foods/:id', (req, res) => {
   if (index >= 0) {
     foods.splice(index, 1);
 
-    res.status(204).send();
+    return res.status(204).send();
   } else {
     return res.status(400).json({ error: 'Food not found.' });
   }
