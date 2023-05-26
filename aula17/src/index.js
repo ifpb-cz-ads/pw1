@@ -57,17 +57,18 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  console.error(err);
+  console.log(err);
 
-  if (err.joi) {
+  if (isCelebrateError(err)) {
+    const message = err.message + ': ' + Object.fromEntries(err.details).body.details[0].message;
     if (!req.originalUrl.includes('api')) {
       // joi error comes from the web app, so redirect with a flash
-      req.flash('error', err.joi.message);
-      return res.redirect(redirUrl);
+      req.flash('error', message);
+      return res.redirect(req.originalUrl);
     }
 
     // joi error comes from an API request, so send an error response
-    return res.status(400).json({ error: err.joi.message });
+    return res.status(400).json({ error: message });
   } else {
     res.status(500).send('Internal server error');
   }

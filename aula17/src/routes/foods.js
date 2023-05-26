@@ -38,8 +38,9 @@ router.post(
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       name: Joi.string().required(),
-      price: Joi.number().precision(2),
-      category_id: Joi.number().integer(),
+      image: Joi.any().required(),
+      price: Joi.number().precision(2).required(),
+      category_id: Joi.number().integer().required(),
     }),
   }),
   foodsController.create
@@ -63,6 +64,15 @@ router.post(
   ),
   foodsController.update
 );
-router.post('/delete', middleware.isAuthenticated, foodsController.destroy);
+router.post(
+  '/delete',
+  middleware.isAuthenticated,
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      id: Joi.number().integer().required(),
+    }),
+  }),
+  foodsController.destroy
+);
 
 module.exports = router;

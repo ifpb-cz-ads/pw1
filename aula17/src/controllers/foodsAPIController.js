@@ -26,13 +26,18 @@ const create = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  const { name, image, price, category_id } = req.body;
   const { id } = req.params;
 
-  const food = await Food.readById(id);
+  const food = await Food.readByIdWithCategoryId(id);
+  let updatedFood = {};
 
   if (food) {
-    const updatedFood = { name, image, price, category_id };
+    for (let prop in food) {
+      updatedFood =
+        req.body[prop] && food[prop] !== req.body[prop]
+          ? { ...updatedFood, [prop]: req.body[prop] }
+          : { ...updatedFood, [prop]: food[prop] };
+    }
 
     await Food.update(id, updatedFood);
 

@@ -69,6 +69,24 @@ async function readById(id) {
   return food;
 }
 
+async function readByIdWithCategoryId(id) {
+  const sql = `
+    SELECT
+      foods.id, foods.name, foods.image, foods.price, foods.category_id
+    FROM
+      categories INNER JOIN foods
+    WHERE
+      categories.id = foods.category_id AND
+      foods.id = ?
+  `;
+
+  const db = await conn();
+
+  const food = await db.get(sql, id);
+
+  return food;
+}
+
 async function update(id, data) {
   const sql = `
     UPDATE
@@ -103,4 +121,12 @@ async function destroy(id) {
   return lastID;
 }
 
-module.exports = { create, createAutoInc, readAll, readById, update, destroy };
+module.exports = {
+  create,
+  createAutoInc,
+  readAll,
+  readById,
+  readByIdWithCategoryId,
+  update,
+  destroy,
+};
