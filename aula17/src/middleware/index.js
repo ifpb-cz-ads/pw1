@@ -31,11 +31,11 @@ const isAuthenticated = async (req, res, next) => {
 };
 
 const isAPIAuthenticated = async (req, res, next) => {
-  const { Authorization } = req.params;
+  const authorization = req.get('authorization');
 
-  if (Authorization) {
+  if (authorization) {
     try {
-      const [, token] = Authorization.split(' ');
+      const [, token] = authorization.split(' ');
       await jwt.verify(token, process.env.SECRET_KEY);
 
       return next();

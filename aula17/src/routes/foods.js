@@ -9,7 +9,7 @@ const middleware = require('../middleware');
 
 const foodsController = require('../controllers/foodsController');
 
-router.get('/', foodsController.readAll);
+router.get('/index', foodsController.index);
 router.get('/create', middleware.isAuthenticated, foodsController.getCreateForm);
 router.get(
   '/delete/:id',

@@ -11,7 +11,7 @@ router.get('/', foodsAPIController.readAll);
 router.get(
   '/:id',
   celebrate({
-    [Segmentos.PARAMS]: {
+    [Segments.PARAMS]: {
       id: Joi.number().integer().required(),
     },
   }),
@@ -54,7 +54,7 @@ router.delete(
       id: Joi.number().integer().required(),
     },
   }),
-  foodsAPIController.delete
+  foodsAPIController.destroy
 );
 
 module.exports = router;

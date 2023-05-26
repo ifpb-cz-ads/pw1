@@ -3,11 +3,8 @@ const router = express.Router();
 
 const { celebrate, Joi, Segments } = require('celebrate');
 
-const usersController = require('../controllers/usersController');
+const usersAPIController = require('../controllers/usersAPIController');
 
-router.get('/signup', usersController.create);
-router.get('/signin', usersController.signin);
-router.get('/signout', usersController.signout);
 router.post(
       '/signup',
       celebrate({
@@ -15,10 +12,9 @@ router.post(
                   name: Joi.string().required(),
                   email: Joi.string().email().required(),
                   password: Joi.string().min(8).required(),
-                  confirm_password: Joi.ref('password'),
             }),
       }),
-      usersController.store
+      usersAPIController.store
 );
 router.post(
       '/signin',
@@ -28,7 +24,7 @@ router.post(
                   password: Joi.string().min(8).required(),
             }),
       }),
-      usersController.authenticate
+      usersAPIController.authenticate
 );
 
 module.exports = router;

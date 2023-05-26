@@ -10,13 +10,17 @@ const readAll = async (req, res) => {
 const readById = async (req, res) => {
   const { id } = req.params;
 
-  res.json({ food });
+  const food = await Food.readById(id);
+
+  if (food) {
+    return res.json({ food });
+  }
+
+  res.status(404).json({ error: 'Food not found.' });
 };
 
 const create = async (req, res) => {
-  const { name, image, price, category_id } = req.body;
-
-  const foodId = await Food.createAutoInc(newFood);
+  const foodId = await Food.createAutoInc(req.body);
 
   res.status(201).json({ foodId });
 };
