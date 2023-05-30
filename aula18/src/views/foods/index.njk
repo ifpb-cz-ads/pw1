@@ -1,0 +1,81 @@
+{% extends "layout.njk" %}
+
+{% set title = "Menu" %}
+
+{% block style %}
+<style>
+  .food-actions {
+    cursor: pointer;
+  }
+  .food-actions a:link {
+    color: black;
+  }
+  .food-actions a:visited {
+    color: black;
+  }
+  .food-actions a:hover {
+    text-decoration: none;
+  }
+  .nav-item {
+    text-align: right;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1 class="mt-5 text-center">
+  {{ title }}
+</h1>
+
+<div class="text-right">
+  <a href="/foods/create" class="btn btn-secondary rounded-circle mr-4 font-weight-bold"
+     title="Cadastrar comida">
+    +
+  </a>
+</div>
+
+<section class="card-deck my-3">
+  {% for food in foods %}
+  <div class="card-food col-sm-6 col-lg-4 col-xl-3 mb-3" id="food-{{ food.id }}">
+    <div class="card">
+      <div class="card-header text-center font-weight-bold">
+        <span class="food-name">
+          {{ food.name }}
+        </span>
+        <span class="food-actions float-right">
+          <a href="/foods/delete/{{ food.id }}" title="Apagar comida">
+            <i class="far fa-trash-alt"></i>
+          </a>
+          <a href="/foods/update/{{ food.id }}" title="Editar comida">
+            <i class="fas fa-pencil-alt"></i>
+          </a>
+        </span>
+      </div>
+      <div class="card-body p-0">
+        <img src="{{ food.image }}" alt="{{ food.name }}" class="w-100">
+      </div>
+      <div class="card-footer text-right">
+        <span class="food-category float-left badge badge-secondary">{{ food.category }}</span>
+        <span class="food-price">{{ food.price }}</span>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+{% endblock %}
+
+{% block script %}
+<script type="module">
+  function formatCurrency() {
+    const prices = document.querySelectorAll('.card-footer .food-price');
+    prices.forEach((price) => {
+      price.innerHTML = Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      }).format(price.innerHTML)
+    });
+  }
+
+  formatCurrency();
+</script>
+{% endblock %}
