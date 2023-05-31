@@ -15,7 +15,7 @@
  *           example: Us3rS#$@
  *     NewUser:
  *       allOf:
- *         - $ref: '#/components/schemas/Food'
+ *         - $ref: '#/components/schemas/User'
  *         - type: object
  *           properties:
  *             name:

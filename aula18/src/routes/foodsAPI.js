@@ -61,7 +61,7 @@ const foodsAPIController = require('../controllers/foodsAPIController');
  * @swagger
  * /api/v1/foods:
  *   get:
- *     summary: Recupera a lista de coidas.
+ *     summary: Recupera a lista de comidas.
  *     description: Recupera a lista de comidas do cardápio. Pode ser usada sem autenticação.
  *     tags:
  *       - foods
