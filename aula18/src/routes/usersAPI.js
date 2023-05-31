@@ -43,6 +43,8 @@ const usersAPIController = require('../controllers/usersAPIController');
  * /api/v1/users/signup:
  *   post:
  *     summary: Cadastra um novo usuário.
+ *     tags:
+ *       - users
  *     requestBody:
  *       required: true
  *       content:
@@ -70,6 +72,8 @@ router.post(
  * /api/v1/users/signin:
  *   post:
  *     summary: Autentica um usuário cadastrado.
+ *     tags:
+ *       - users
  *     requestBody:
  *       required: true
  *       content:

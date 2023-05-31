@@ -63,6 +63,8 @@ const foodsAPIController = require('../controllers/foodsAPIController');
  *   get:
  *     summary: Recupera a lista de coidas.
  *     description: Recupera a lista de comidas do cardápio. Pode ser usada sem autenticação.
+ *     tags:
+ *       - foods
  *     responses:
  *       200:
  *         description: Uma lista de comidas.
@@ -83,6 +85,8 @@ router.get('/', foodsAPIController.readAll);
  *   get:
  *     summary: Recupera uma única comida.
  *     description: Recupera uma única comida do cardário pelo ID. Pode ser usada sem autenticação.
+ *     tags:
+ *       - foods
  *     parameters:
  *       - in: path
  *         name: id
@@ -115,6 +119,8 @@ router.get(
  * /api/v1/foods:
  *   post:
  *     summary: Cria uma nova comida.
+ *     tags:
+ *       - foods
  *     parameters:
  *       - in: header
  *         name: Authorization
@@ -156,6 +162,8 @@ router.post(
  *   patch:
  *     summary: Atualiza uma comida.
  *     description: Modifica os valores de uma comida já cadastrada no cardápio, recuperada pelo ID.
+ *     tags:
+ *       - foods
  *     requestBody:
  *       required: false
  *       content:
@@ -201,6 +209,8 @@ router.patch(
  * /api/v1/foods/{id}:
  *   delete:
  *     summary: Apaga uma comida.
+ *     tags:
+ *       - foods
  *     parameters:
  *       - in: header
  *         name: Authorization

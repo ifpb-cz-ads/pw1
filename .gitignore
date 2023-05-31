@@ -108,3 +108,6 @@ dist
 
 # sqlite
 .sqlite
+
+# session db
+sessions
