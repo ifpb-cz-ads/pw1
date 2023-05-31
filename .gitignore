@@ -107,7 +107,7 @@ dist
 .DS_Store
 
 # sqlite
-.sqlite
+*.sqlite
 
 # session db
-sessions
+**/sessions
