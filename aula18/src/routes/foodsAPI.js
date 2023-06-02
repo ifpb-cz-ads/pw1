@@ -1,6 +1,11 @@
 /**
  * @swagger
  * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
  *   schemas:
  *     Food:
  *       type: object
@@ -121,13 +126,8 @@ router.get(
  *     summary: Cria uma nova comida.
  *     tags:
  *       - foods
- *     parameters:
- *       - in: header
- *         name: Authorization
- *         example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
- *         schema:
- *           type: string
- *         required: true
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -164,6 +164,8 @@ router.post(
  *     description: Modifica os valores de uma comida já cadastrada no cardápio, recuperada pelo ID.
  *     tags:
  *       - foods
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: false
  *       content:
@@ -171,12 +173,6 @@ router.post(
  *           schema:
  *             $ref: '#/components/schemas/NewFood'
  *     parameters:
- *       - in: header
- *         name: Authorization
- *         example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
- *         schema:
- *           type: string
- *         required: true
  *       - in: path
  *         name: id
  *         required: true
@@ -211,13 +207,9 @@ router.patch(
  *     summary: Apaga uma comida.
  *     tags:
  *       - foods
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
- *       - in: header
- *         name: Authorization
- *         example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
- *         schema:
- *           type: string
- *         required: true
  *       - in: path
  *         name: id
  *         required: true
