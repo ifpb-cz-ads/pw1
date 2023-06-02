@@ -5,8 +5,12 @@ const parser = multer({
   storage: multer.diskStorage({
     destination: 'public/imgs',
     filename(req, file, callback) {
-      file.key = `${randomBytes(16).toString('hex')}-${file.originalname}`;
-      callback(null, file.key);
+      if (file) {
+        file.key = `${randomBytes(16).toString('hex')}-${file.originalname}`;
+        callback(null, file.key);
+      } else {
+        callback(new Error('File cannot be empty'));
+      }
     },
   }),
 });

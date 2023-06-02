@@ -12,11 +12,12 @@
     <div class="mb-3">
       <label for="food-name">Nome</label>
       <input type="text" class="form-control" id="food-name" name="name"
-             value="{{ food.name if food else '' }}">
+             value="{{ food.name if food else '' }}" {{ 'required' if mode === 'create' }}>
     </div>
     <div class="mb-3">
       <label for="food-image">Imagem</label>
-      <input type="file" class="form-control" id="food-image" name="image" accept="image/*">
+      <input type="file" class="form-control" id="food-image" name="image" accept="image/*"
+             {{ 'required' if mode === 'create' }}>
       {% if food %}
         <input type="hidden" value="{{ food.id }}" name="id">
         <input type="hidden" name="originalImage" value="{{ food.image if food }}">
@@ -25,8 +26,8 @@
     </div>
     <div class="mb-3">
       <label for="food-price">Preço</label>
-      <input type="text" class="form-control" id="food-price" name="price"
-             value="{{ food.price if food else ''}}">
+      <input type="number" min="0" step="0.01" class="form-control" id="food-price" name="price"
+             value="{{ food.price if food else ''}}" {{ 'required' if mode === 'create' }}>
     </div>
     <div class="mb-3">
       <label for="food-category">Categoria</label>

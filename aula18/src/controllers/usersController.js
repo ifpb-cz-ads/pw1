@@ -24,7 +24,7 @@ const store = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-    const hash = await bcrypt.hash(password, Number(process.env.SALT));
+    const hash = await bcrypt.hash(password, parseInt(process.env.SALT, 10));
     const newUser = { name, email, password: hash };
 
     const user = await User.createAutoInc(newUser);

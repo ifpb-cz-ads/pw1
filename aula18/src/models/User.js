@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const { conn } = require('../db');
+const dotenv = require('dotenv').config(); // in case this module is called independently
 
 async function create(data) {
   const sql = `
@@ -12,9 +13,9 @@ async function create(data) {
   const db = await conn();
 
   const { id, name, email, password } = data;
-  console.log('salt: ' + process.env.SALT);
+  const salt = parseInt(process.env.SALT, 10);
 
-  const hash = await bcrypt.hash(password, process.env.SALT);
+  const hash = await bcrypt.hash(password, salt);
 
   const { lastID } = await db.run(sql, [id, name, email, hash]);
 

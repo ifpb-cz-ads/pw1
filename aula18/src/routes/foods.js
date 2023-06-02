@@ -38,7 +38,6 @@ router.post(
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       name: Joi.string().required(),
-      image: Joi.any().required(),
       price: Joi.number().precision(2).required(),
       category_id: Joi.number().integer().required(),
     }),
